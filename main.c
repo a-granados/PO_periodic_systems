@@ -23,10 +23,10 @@ double t0=0;
 
 
 
-void vfield(double t, double *x, int ndim, double *dx);
+void vfield(double t, double *x, int ndim, double *dx);//This function contains the differential equation + the variational equations
 int Newton_method (int q,double *xout,double **DPout);
-int strobomap(double* xini, double tf, double **DP);
-void stability(double **A);
+int strobomap(double* xini, double tf, double **DP);//This computes the time-qT return time
+void stability(double **A);//This computes eigenvalues and eigenvectors to check stability
 
 int main(int argc, char * argv[]){
   int i;
