@@ -1,1 +1,1 @@
-# PO_periodic_systems
+Computation of periodic orbits for non-autonomous systems
