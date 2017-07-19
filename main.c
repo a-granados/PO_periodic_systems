@@ -19,6 +19,7 @@ using namespace std;
 double twopi=8*atan(1.);
 int n=2; //Dimension of the system
 double T=twopi;//Period of the non-autonomous system
+double t0=0;
 
 
 
@@ -207,7 +208,7 @@ int Newton_method(int q,double *xout,double **DPout){
 }
 
 int strobomap(double* xini, double tf, double **DP){
-  double t=0.; 
+  double t=t0; 
   int i,j;
   int ndim=n+n*n;//Dimension of the system with the variational equations
   double *dx=new double[ndim];
@@ -232,11 +233,11 @@ int strobomap(double* xini, double tf, double **DP){
     }
   }
  ini_rk78(ndim);
- while (t<tf){
+ while (t<t0+tf){
   rk78(&t,x,&h,tol,hmin,hmax,ndim,vfield);
  }
 
- h=-(t-tf);
+ h=-(t-tf-t0);
  rk78(&t,x,&h,tol,fabs(h),fabs(h),ndim,vfield);
  end_rk78(ndim);
 
