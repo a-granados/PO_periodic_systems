@@ -47,7 +47,7 @@ S_{t_0}(x)=\varphi(t_0+qT;x)
 <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
 &nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
-is the stroboscopic map (time qt return map).
+is the stroboscopic map (time qT return map).
 The solution to this equation provides a point such that
 <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
  \begin{equation*}
