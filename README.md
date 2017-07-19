@@ -1,6 +1,7 @@
 Computation of periodic orbits for non-autonomous systems
 
 These routines compute the initial conditions for a periodic orbit of a non-autonomous of type
+
 <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
  \begin{equation*}
 \dot{x}=f(x,t),\quad f(x,t+T)=f(x,t)
