@@ -1,4 +1,4 @@
-Computation of periodic orbits for non-autonomous systems
+<h4>Computation of periodic orbits for non-autonomous systems</h4>
 
 These routines compute the initial conditions for a periodic orbit of a non-autonomous with periodic dependence on time:
 <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
