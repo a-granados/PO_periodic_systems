@@ -30,6 +30,7 @@ void stability(double **A);//This computes eigenvalues and eigenvectors to check
 void simulate_po(double *x,double tf);
 
 int main(int argc, char * argv[]){
+  cout.precision(15);
   int i,result;
   double *x=new double[n];
   double **DP=new double*[n];
@@ -56,6 +57,7 @@ int main(int argc, char * argv[]){
     cout <<endl;
     cout <<"Eigenvalues and eigenvectors of Ds"<<endl;
     stability(DP);
+    cout <<"Periodic orbit of the time-continuous system has been saved in \"trajectory.dat\" file"<<endl;
   }
 
   delete[] x;
@@ -177,7 +179,7 @@ int Newton_method(int q,double *xout,double **DPout){
      }
      dist=sqrt(dist);
      //For debuggin purposes
-     //cout <<"-2 "<<dist<<endl;
+     cout <<"#Error in iteration "<<nite+1<<": "<<dist<<endl;
 
      nite++;
   }
@@ -332,23 +334,22 @@ void vfield(double t, double *x, int ndim, double *dx){
 }
 */
 
-/*
 void vfield(double t, double *x, int ndim, double *dx){
   //Landau oscillator
   dx[0]=x[0]-x[1]-x[0]*(pow(x[0],2)+pow(x[1],2));
   dx[1]=x[0]+x[1]-x[1]*(pow(x[0],2)+pow(x[1],2))+sin(t);
   //Variational equations
-  double J1=1 -3.*pow(x[0],2.)+pow(x[1],2.);
-  double J2=-1-2.*x[0]*x[1];
-  double J3=1-2.*x[1]*x[0];
-  double J4=1-pow(x[0],2.)+3.*pow(x[1],2.);
+  double J1=1. -3.*pow(x[0],2.)-pow(x[1],2.);
+  double J2=-1.-2.*x[0]*x[1];
+  double J3=1.-2.*x[1]*x[0];
+  double J4=1.-pow(x[0],2.)-3.*pow(x[1],2.);
   dx[2]=J1*x[2]+J2*x[4];
   dx[3]=J1*x[3]+J2*x[5];
   dx[4]=J3*x[2]+J4*x[4];
-  dx[5]=J3*x[3]*J4*x[5];
+  dx[5]=J3*x[3]+J4*x[5];
 }
-  */
 
+/*
 void vfield(double t, double *x, int ndim, double *dx){
   //Forced hyperbolic point
   double omega=twopi/T;
@@ -365,10 +366,10 @@ void vfield(double t, double *x, int ndim, double *dx){
   dx[4]=J3*x[2]+J4*x[4];
   dx[5]=J3*x[3]+J4*x[5];
 }
+  */
 
 void simulate_po(double *x,double tf){
   double t=t0;
-  int n=2;
   int ndim=n+n*n;
   double twopi=8*atan(1.);
   double h=0.05;
@@ -381,6 +382,9 @@ void simulate_po(double *x,double tf){
   ofstream ofile;
   ofile.precision(10);
   ofile.open("trajectory.dat");
+  for (i=0;i<n;i++){
+    xv[i]=x[i];
+  }
   for (i=n;i<ndim;i++){
     if ((i-n)%(n+1)==0){
       xv[i]=1.;
@@ -389,6 +393,7 @@ void simulate_po(double *x,double tf){
       xv[i]=0.;
     }
   }
+  ofile<<"#First column is time, 2 to "<<n+1<<" columns are state variables, "<< n+2<<" to "<<n+n*n+1<<" columns are the variational equations"<<endl;
   ini_rk78(ndim);
   while (t<t0+tf){
     ofile<<" "<<t<<" ";
